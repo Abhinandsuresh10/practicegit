@@ -40,7 +40,6 @@ const Crud = () => {
   }
 };
 
-
   useEffect(() => {
     fetchData()
   }, [])

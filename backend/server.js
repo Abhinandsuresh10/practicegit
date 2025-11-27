@@ -2,14 +2,25 @@ import express from 'express'
 import crudRoutes from './src/routes/crud.routes.js';
 import dotenv from 'dotenv';
 import connectDB from './src/config/db.js';
+import cors from 'cors'
 
 dotenv.config();
 
 const app = express();
 
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ["POST", "PUT", "DELETE", "GET", "OPTIONS"]
+}))
+
 app.use(express.json());
 
-connectDB()
+connectDB();
+
+app.use((req, res, next) => {
+    console.log('hello', req.url, req.method);
+    next()
+})
 
 const PORT = process.env.PORT || 5000;
 
